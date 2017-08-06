@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Efraim&#39;s Blog</title>
+    <link>http://efraim.me/</link>
+    <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
+    
+    <description></description>
+    <pubDate>Sat, 05 Aug 2017 12:54:35 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>来深圳的一个月</title>
+      <link>http://efraim.me/2017/08/05/Living/hello-world/</link>
+      <guid>http://efraim.me/2017/08/05/Living/hello-world/</guid>
+      <pubDate>Sat, 05 Aug 2017 11:45:35 GMT</pubDate>
+      <description>
+      
+        &lt;p&gt;今天是8.5号&lt;br&gt;已经来深圳一月了&lt;/p&gt;
+&lt;p&gt;回首毕业时&lt;br&gt;嬉笑怒骂、无比欢乐&lt;br&gt;无法返回的青春时光&lt;/p&gt;
+&lt;p&gt;回忆起&lt;br&gt;宿舍通宵的复习、备考、做小抄、调侃&lt;br&gt;一起打篮球比赛、3v3篮球赛&lt;br&gt;打累了 坐在篮球场上聊天&lt;br&gt;一起在宿舍打游戏&lt;
+      
+      </description>
+      
+      <comments>http://efraim.me/2017/08/05/Living/hello-world/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>毕业旅行--彩云之南</title>
+      <link>http://efraim.me/2017/08/05/Living/travel-of-yunan/</link>
+      <guid>http://efraim.me/2017/08/05/Living/travel-of-yunan/</guid>
+      <pubDate>Sat, 05 Aug 2017 11:45:35 GMT</pubDate>
+      <description>
+      
+        &lt;p&gt;好不容易和又又出去旅游一趟&lt;br&gt;在此记录一下&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;第一天（20号）&quot;&gt;&lt;a href=&quot;#第一天（20号）&quot; class=&quot;headerlink&quot; title=&quot;第一天（20号）&quot;&gt;&lt;/a&gt;第一天（20号）&lt;/h2&gt;&lt;h3 id=&quot;早上&quot;&gt;&lt;
+      
+      </description>
+      
+      <comments>http://efraim.me/2017/08/05/Living/travel-of-yunan/#disqus_thread</comments>
+    </item>
+    
+  </channel>
+</rss>
