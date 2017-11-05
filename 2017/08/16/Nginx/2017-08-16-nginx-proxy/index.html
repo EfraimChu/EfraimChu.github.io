@@ -12,7 +12,7 @@
     
     <title>
         
-            归档: 2017 | 
+            Nginx： 正向与反向代理 | 
         
         Efraim&#39;s Blog
     </title>
@@ -67,15 +67,18 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://efraim.me">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="归档: 2017 | Efraim&#39;s Blog">
+    <meta property="og:title" content="Nginx： 正向与反向代理 | Efraim&#39;s Blog">
     <meta property="og:image" content="http://img.efraim.me/blog/photo/favicon.png" />
     <meta property="og:description" content="">
     
 
     
+        <meta property="article:published_time" content="Wed Aug 16 2017 19:45:35 GMT+0800" />
+        <meta property="article:modified_time" content="Sun Nov 05 2017 22:18:14 GMT+0800" />
+    
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="归档: 2017 | Efraim&#39;s Blog">
+    <meta name="twitter:title" content="Nginx： 正向与反向代理 | Efraim&#39;s Blog">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="http://img.efraim.me/blog/photo/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
@@ -83,13 +86,43 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://efraim.me/archives/2017/index.html" />
+        <link rel="canonical" href="http://efraim.me/2017/08/16/Nginx/2017-08-16-nginx-proxy/index.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Efraim&#39;s Blog",
+        "logo": "http://img.efraim.me/blog/photo/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Efraim Zhu",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://img.efraim.me/blog/photo/favicon.png"
+        },
+        "description": "花花世界 独守一支"
+    },
+    "headline": "Nginx： 正向与反向代理",
+    "url": "http://efraim.me/2017/08/16/Nginx/2017-08-16-nginx-proxy/index.html",
+    "datePublished": "Wed Aug 16 2017 19:45:35 GMT+0800",
+    "dateModified": "Sun Nov 05 2017 22:18:14 GMT+0800",
+    "description": "",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://efraim.me"
+    }
+}
+</script>
 
 
     
@@ -273,506 +306,329 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
     
-
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="http://img.efraim.me/jquery.png">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/09/07/FE/2017-09-07-dom-jquery-object/">jQuery对象和DOM对象</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            对jQuery对象和DOM对象，总是搞混乱，做下笔记。
-
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/09/07/FE/2017-09-07-dom-jquery-object/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="http://img.efraim.me/blog/photo/avatar.jpg" width="44px" height="44px" alt="Efraim Zhu's avatar">
-            </div>
-            <div>
-                <strong>Efraim Zhu</strong>
-                <span>9月 07, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/FE/">FE</a>
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
             </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
+        </a>
     </div>
-</div>
+    -->
 
-            
-            
-        
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
     
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="http://img.efraim.me/http.png">
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Nginx：-正向与反向代理"><span class="post-toc-number">1.</span> <span class="post-toc-text">Nginx： 正向与反向代理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概述"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">概述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#0x01-概念"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">0x01 概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#0x02-Nginx的代理模式"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">0x02 Nginx的代理模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#注意："><span class="post-toc-number">1.1.2.1.</span> <span class="post-toc-text">注意：</span></a></li></ol></li></ol></li></ol></li></ol>
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
     
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/08/16/HTTP/2017-08-17-HTTP/">HTTP的Form Data\ Request payload</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-HTTP请求中Form Data 、Request Payload
 
 
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/08/16/HTTP/2017-08-17-HTTP/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="http://img.efraim.me/blog/photo/avatar.jpg" width="44px" height="44px" alt="Efraim Zhu's avatar">
-            </div>
-            <div>
-                <strong>Efraim Zhu</strong>
-                <span>8月 16, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/living/">living</a>
-            </span>
 
-            
 
-            
+<!-- Layouts -->
 
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
+    <!-- Post Module -->
+    <div class="material-post_container">
 
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="http://img.efraim.me/nginx.png">
-    
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/08/16/Nginx/2017-08-16-nginx-proxy/">Nginx： 正向与反向代理</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/08/16/Nginx/2017-08-16-nginx-proxy/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="http://img.efraim.me/blog/photo/avatar.jpg" width="44px" height="44px" alt="Efraim Zhu's avatar">
-            </div>
-            <div>
-                <strong>Efraim Zhu</strong>
-                <span>8月 16, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/living/">living</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="http://img.efraim.me/nginx.png">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/08/16/Nginx/2017-08-17-nginx-rewirte/">Nginx： rewrite</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/08/16/Nginx/2017-08-17-nginx-rewirte/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="http://img.efraim.me/blog/photo/avatar.jpg" width="44px" height="44px" alt="Efraim Zhu's avatar">
-            </div>
-            <div>
-                <strong>Efraim Zhu</strong>
-                <span>8月 16, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/living/">living</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/08/07/Git/2017-08-07/"></a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-title: Shell 和 Vim 快捷键date: 2017/8/7 19:45:35thumbnail: 
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/08/07/Git/2017-08-07/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="http://img.efraim.me/blog/photo/avatar.jpg" width="44px" height="44px" alt="Efraim Zhu's avatar">
-            </div>
-            <div>
-                <strong>Efraim Zhu</strong>
-                <span>8月 07, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
+                <!-- Post Header(Thumbnail & Title) -->
                 
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+    <!-- Paradox Post Header -->
     
         <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="http://img.efraim.me/blog/photo/sun.jpg">
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://img.efraim.me/nginx.png)">
+    
+            <p class="article-headline-p">
+                Nginx： 正向与反向代理
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="http://img.efraim.me/blog/photo/avatar.jpg" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Efraim Zhu</strong>
+        <span>8月 16, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
     
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/08/05/Living/hello-sz/">来深圳的一个月</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
         
-            今天是8.5号已经来深圳一月了
+    </ul>
+    
 
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/08/05/Living/hello-sz/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="http://img.efraim.me/blog/photo/avatar.jpg" width="44px" height="44px" alt="Efraim Zhu's avatar">
-            </div>
-            <div>
-                <strong>Efraim Zhu</strong>
-                <span>8月 05, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/living/">living</a>
-            </span>
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
 
-            
+    
 
-            
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Nginx： 正向与反向代理&url=http://efraim.me/2017/08/16/Nginx/2017-08-16-nginx-proxy/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
 
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Nginx： 正向与反向代理&url=http://efraim.me/2017/08/16/Nginx/2017-08-16-nginx-proxy/index.html&via=Efraim Zhu" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://efraim.me/2017/08/16/Nginx/2017-08-16-nginx-proxy/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://efraim.me/2017/08/16/Nginx/2017-08-16-nginx-proxy/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
 </div>
 
-            
-            
-        
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+        <h1 id="Nginx：-正向与反向代理"><a href="#Nginx：-正向与反向代理" class="headerlink" title="Nginx： 正向与反向代理"></a>Nginx： 正向与反向代理</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="0x01-概念"><a href="#0x01-概念" class="headerlink" title="0x01 概念"></a>0x01 概念</h3><p>正向代理</p>
+<blockquote>
+<p>客户端A -&gt;（C）-&gt;B 通过C代理。<br>注意：A知道自己要访问B<br>例子： A：你的手机<br>           B：Google<br>            C：你的VPN</p>
+</blockquote>
+<p>反向代理：</p>
+<blockquote>
+<p>客户端A -&gt; B –&gt;C<br>注意：A要访问B的资源，但该资源其实在C服务器上，B取到该资源后，再返回给A<br>例子：A：用餐者<br>          B：点菜员<br>          C：厨师</p>
+</blockquote>
+<h3 id="0x02-Nginx的代理模式"><a href="#0x02-Nginx的代理模式" class="headerlink" title="0x02 Nginx的代理模式"></a>0x02 Nginx的代理模式</h3><p>Nginx支持正向代理和反向代理。不支持TCP隧道代理，所以不能代理HTTPS。</p>
+<h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><ol>
+<li>proxy_pass 根路径／问题</li>
+</ol>
+<p>第一种：<br><code>location ^~ /static/ 
+{ 
+    proxy_set_header Host a.com; 
+    proxy_pass http://b.com/; 
+}</code><br>上述代理结果：<br>    a.com/static/demo.png =&gt; b.com/demo.png</p>
+<p>第二种：<br><code>location ^~ /static/ 
+{ 
+    proxy_set_header Host a.com; 
+    proxy_pass http://b.com; 
+}</code><br>注意proxy_pass b.com后面没有’/‘</p>
+<p>代理结果：<br>    a.com/static/demo.png =&gt; b.com/static/demo.png</p>
+<pre><code>第一种也可以通过rewite来实现
+</code></pre><ol>
+<li>proxy_pass variable ；通过变量传递host时的问题<br> 通过变量传递host时，注意不能有URI，若有，参数不能传递过去</li>
+</ol>
+<pre><code>### 两个proxy_pass
+
+1. proxy_pass
+    ngx_http_proxy_module的proxy_pass：
+    ngx_stream_proxy_module的proxy_pass：
+2. 区别
+    ngx_http_proxy_module的proxy_pass：只能用于server段，可以理解为端口转发
+    ngx_stream_proxy_module的proxy_pass：在 location, if in location, limit_except段。
+3. 用法：
+</code></pre><p>ngx_http_proxy_module的proxy_pass：</p>
+<figure class="highlight plain"><figcaption><span>&#123;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">    listen 127.0.0.1:12345;</div><div class="line">    proxy_pass 127.0.0.1:8080;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen 12345;</div><div class="line">    proxy_connect_timeout 1s;</div><div class="line">    proxy_timeout 1m;</div><div class="line">    proxy_pass example.com:12345;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen 53 udp;</div><div class="line">    proxy_responses 1;</div><div class="line">    proxy_timeout 20s;</div><div class="line">    proxy_pass dns.example.com:53;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen [::1]:12345;</div><div class="line">    proxy_pass unix:/tmp/stream.socket;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<pre><code>ngx_stream_proxy_module的proxy_pass：
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">	server &#123;</div><div class="line">    listen      80;</div><div class="line">    server_name www.test.com;</div><div class="line"></div><div class="line">    // 正常代理，不修改后端url的</div><div class="line">    location /some/path/ &#123;</div><div class="line">        proxy_pass http://127.0.0.1;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //修改后端url地址的代理（本例后端地址中，最后带了一个斜线)</div><div class="line">    location /testb &#123;</div><div class="line">        proxy_pass http://www.other.com:8801/;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //使用 if in location</div><div class="line">    location /google &#123;</div><div class="line">        if ( $geoip_country_code ~ (RU|CN) ) &#123;</div><div class="line">            proxy_pass http://www.google.hk;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location /yongfu/ &#123;</div><div class="line">        # 没有匹配 limit_except 的，代理到 unix:/tmp/backend.socket:/uri/</div><div class="line">        proxy_pass http://unix:/tmp/backend.socket:/uri/;;</div><div class="line"></div><div class="line">        # 匹配到请求方法为: PUT or DELETE, 代理到9080</div><div class="line">        limit_except PUT DELETE &#123;</div><div class="line">            proxy_pass http://127.0.0.1:9080;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>结果</li>
+</ol>
+<figure class="highlight plain"><figcaption><span>&#123;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">    listen      80;</div><div class="line">    server_name www.test.com;</div><div class="line"></div><div class="line">    # 情形A</div><div class="line">    # 访问 http://www.test.com/testa/aaaa</div><div class="line">    # 后端的request_uri为: /testa/aaaa</div><div class="line">    location ^~ /testa/ &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形B</div><div class="line">    # 访问 http://www.test.com/testb/bbbb</div><div class="line">    # 后端的request_uri为: /bbbb</div><div class="line">    location ^~ /testb/ &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801/;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形C</div><div class="line">    # 下面这段location是正确的</div><div class="line">    location ~ /testc &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形D</div><div class="line">    # 下面这段location是错误的</div><div class="line">    #</div><div class="line">    # nginx -t 时，会报如下错误: </div><div class="line">    #</div><div class="line">    # nginx: [emerg] &quot;proxy_pass&quot; cannot have URI part in location given by regular </div><div class="line">    # expression, or inside named location, or inside &quot;if&quot; statement, or inside </div><div class="line">    # &quot;limit_except&quot; block in /opt/app/nginx/conf/vhost/test.conf:17</div><div class="line">    # </div><div class="line">    # 当location为正则表达式时，proxy_pass 不能包含URI部分。本例中包含了&quot;/&quot;</div><div class="line">    location ~ /testd &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801/;   # 记住，location为正则表达式时，不能这样写！！！</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形E</div><div class="line">    # 访问 http://www.test.com/ccc/bbbb</div><div class="line">    # 后端的request_uri为: /aaa/ccc/bbbb</div><div class="line">    location /ccc/ &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801/aaa$request_uri;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形F</div><div class="line">    # 访问 http://www.test.com/namea/ddd</div><div class="line">    # 后端的request_uri为: /yongfu?namea=ddd</div><div class="line">    location /namea/ &#123;</div><div class="line">        rewrite    /namea/([^/]+) /yongfu?namea=$1 break;</div><div class="line">        proxy_pass http://127.0.0.1:8801;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形G</div><div class="line">    # 访问 http://www.test.com/nameb/eee</div><div class="line">    # 后端的request_uri为: /yongfu?nameb=eee</div><div class="line">    location /nameb/ &#123;</div><div class="line">        rewrite    /nameb/([^/]+) /yongfu?nameb=$1 break;</div><div class="line">        proxy_pass http://127.0.0.1:8801/;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    access_log /data/logs/www/www.test.com.log;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen      8801;</div><div class="line">    server_name www.test.com;</div><div class="line"></div><div class="line">    root        /data/www/test;</div><div class="line">    index       index.php index.html;</div><div class="line"></div><div class="line">    rewrite ^(.*)$ /test.php?u=$1 last;</div><div class="line"></div><div class="line">    location ~ \.php$ &#123;</div><div class="line">        try_files $uri =404;</div><div class="line">        fastcgi_pass unix:/tmp/php-cgi.sock;</div><div class="line">        fastcgi_index index.php;</div><div class="line">        include fastcgi.conf;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    access_log /data/logs/www/www.test.com.8801.log;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
     
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="http://img.efraim.me/blog/photo/index1.png">
+
     
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/08/04/Living/travel-of-yunan/">毕业旅行--彩云之南</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            好不容易和又又出去旅游一趟在此记录一下
-
-
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/08/04/Living/travel-of-yunan/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="http://img.efraim.me/blog/photo/avatar.jpg" width="44px" height="44px" alt="Efraim Zhu's avatar">
-            </div>
-            <div>
-                <strong>Efraim Zhu</strong>
-                <span>8月 04, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/travel/">travel</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
 </div>
 
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="http://img.efraim.me/docker.jpg">
-    
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/08/04/docker/2017-08-29-dev/">使用docker来构建开发环境</a></p>
-    </div>
+                
 
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-docker 开发流程
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
 
-
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/08/04/docker/2017-08-29-dev/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="http://img.efraim.me/blog/photo/avatar.jpg" width="44px" height="44px" alt="Efraim Zhu's avatar">
-            </div>
-            <div>
-                <strong>Efraim Zhu</strong>
-                <span>8月 04, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/dev/">dev</a>
-            </span>
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #757575;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load"> 
+    <button class="disqus_click_btn">阅读评论（请确保 disqus 可以正常加载）</button>
 </div>
 
-            
-            
-        
-    
-
-    
-
-    
-        <script type="text/ls-javascript" id="thumbnail-script">
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', 'http://img.efraim.me/blog/photo/random/material-' + randomNum + '.png');
-    $('.post_thumbnail-random').addClass('lazy');
-
-        locatePost = locatePost.next();
-    }
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://efraim.me/2017/08/16/Nginx/2017-08-16-nginx-proxy/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://efraim.me/2017/08/16/Nginx/2017-08-16-nginx-proxy/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
 </script>
 
-    
+<script type="text/ls-javascript" id="disqus-lazy-load-script">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//efraim-2.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+  	
+
 </div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/08/16/HTTP/2017-08-17-HTTP/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/08/16/Nginx/2017-08-17-nginx-rewirte/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     

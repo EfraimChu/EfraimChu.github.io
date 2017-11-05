@@ -3,6 +3,524 @@
   
     
     <entry>
+      <title><![CDATA[jQuery对象和DOM对象]]></title>
+      <url>/2017/09/07/FE/2017-09-07-dom-jquery-object/</url>
+      <content type="html"><![CDATA[<p>对jQuery对象和DOM对象，总是搞混乱，做下笔记。</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ol>
+<li><p>DOM对象：<br> 我们用传统方法获取的对象：如 <code>var domObj = document.getElementById(“id”); //DOM对象</code></p>
+</li>
+<li><p>JQuery对象：我们Jquery类库的选择器获取的对象：如：<code>var obj=$(&#39;#od&#39;)</code></p>
+</li>
+</ol>
+<p>注意：Jquery对象无法使用DOM对象的任何方法：如：<code>$(&#39;#id&#39;).innerHTML(...),$(&#39;#id&#39;).checked</code>。但是可以使用<code>$(&#39;#id&#39;).html(),$(&#39;#id&#39;).attr(&#39;checked&#39;)</code>来替代。同样<em>DOM对象</em>也不能使用JQuery对象 的方法。</p>
+<h2 id="Jquery对象和DOM对象相互转换"><a href="#Jquery对象和DOM对象相互转换" class="headerlink" title="Jquery对象和DOM对象相互转换"></a>Jquery对象和DOM对象相互转换</h2><ol>
+<li><p>JQuery对象 =》 DOM对象</p>
+<blockquote>
+<p>使用obj[index]或者obj.get(index)</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var cr=(“#cr”); //jquery对象 </div><div class="line"><span class="keyword">var</span> cr = cr[<span class="number">0</span>];<span class="comment">//dom对象也可写成varcr=cr.get(0); </span></div><div class="line">alert(cr.checked); <span class="comment">//检测这个checkbox是否给选中</span></div></pre></td></tr></table></figure>
+<ol>
+<li>DOM 对象 ==》JQuery对象</li>
+</ol>
+<blockquote>
+<p>   将DOM对象用<code>（）</code> 包装起来即可</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cr=<span class="built_in">document</span>.getElementById(‘cr’); <span class="comment">//dom对象 </span></div><div class="line"><span class="keyword">var</span> cr= $(cr); <span class="comment">//转换成jquery对象</span></div></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> FE </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[HTTP的Form Data\ Request payload]]></title>
+      <url>/2017/08/16/HTTP/2017-08-17-HTTP/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>HTTP请求中Form Data 、Request Payload</p>
+</blockquote>
+<h2 id="HTTP请求中Form-Data-、Request-Payload"><a href="#HTTP请求中Form-Data-、Request-Payload" class="headerlink" title="HTTP请求中Form Data 、Request Payload"></a>HTTP请求中Form Data 、Request Payload</h2><p>Ajax 发送POST类型的传参方式：Form Data、Request Payload</p>
+<h3 id="两种方式"><a href="#两种方式" class="headerlink" title="两种方式"></a>两种方式</h3><p>Form Data形式<br>请求头：<code>Content-Type: application/x-www-form-urlencoded</code></p>
+<p>Request Payload:<br>请求头： <code>Content-Type:application/json</code></p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>Form Data : 被认为表单请求。<br>Request Payload: 设置<code>Content-Type:application/json</code> 、<code>Content-Type:text/plain</code> 参数会放在Request Payload 中</p>
+]]></content>
+      
+        <categories>
+            
+            <category> living </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Nginx： 正向与反向代理]]></title>
+      <url>/2017/08/16/Nginx/2017-08-16-nginx-proxy/</url>
+      <content type="html"><![CDATA[<h1 id="Nginx：-正向与反向代理"><a href="#Nginx：-正向与反向代理" class="headerlink" title="Nginx： 正向与反向代理"></a>Nginx： 正向与反向代理</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="0x01-概念"><a href="#0x01-概念" class="headerlink" title="0x01 概念"></a>0x01 概念</h3><p>正向代理</p>
+<blockquote>
+<p>客户端A -&gt;（C）-&gt;B 通过C代理。<br>注意：A知道自己要访问B<br>例子： A：你的手机<br>           B：Google<br>            C：你的VPN</p>
+</blockquote>
+<p>反向代理：</p>
+<blockquote>
+<p>客户端A -&gt; B –&gt;C<br>注意：A要访问B的资源，但该资源其实在C服务器上，B取到该资源后，再返回给A<br>例子：A：用餐者<br>          B：点菜员<br>          C：厨师</p>
+</blockquote>
+<h3 id="0x02-Nginx的代理模式"><a href="#0x02-Nginx的代理模式" class="headerlink" title="0x02 Nginx的代理模式"></a>0x02 Nginx的代理模式</h3><p>Nginx支持正向代理和反向代理。不支持TCP隧道代理，所以不能代理HTTPS。</p>
+<h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><ol>
+<li>proxy_pass 根路径／问题</li>
+</ol>
+<p>第一种：<br><code>location ^~ /static/ 
+{ 
+    proxy_set_header Host a.com; 
+    proxy_pass http://b.com/; 
+}</code><br>上述代理结果：<br>    a.com/static/demo.png =&gt; b.com/demo.png</p>
+<p>第二种：<br><code>location ^~ /static/ 
+{ 
+    proxy_set_header Host a.com; 
+    proxy_pass http://b.com; 
+}</code><br>注意proxy_pass b.com后面没有’/‘</p>
+<p>代理结果：<br>    a.com/static/demo.png =&gt; b.com/static/demo.png</p>
+<pre><code>第一种也可以通过rewite来实现
+</code></pre><ol>
+<li>proxy_pass variable ；通过变量传递host时的问题<br> 通过变量传递host时，注意不能有URI，若有，参数不能传递过去</li>
+</ol>
+<pre><code>### 两个proxy_pass
+
+1. proxy_pass
+    ngx_http_proxy_module的proxy_pass：
+    ngx_stream_proxy_module的proxy_pass：
+2. 区别
+    ngx_http_proxy_module的proxy_pass：只能用于server段，可以理解为端口转发
+    ngx_stream_proxy_module的proxy_pass：在 location, if in location, limit_except段。
+3. 用法：
+</code></pre><p>ngx_http_proxy_module的proxy_pass：</p>
+<figure class="highlight plain"><figcaption><span>&#123;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">    listen 127.0.0.1:12345;</div><div class="line">    proxy_pass 127.0.0.1:8080;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen 12345;</div><div class="line">    proxy_connect_timeout 1s;</div><div class="line">    proxy_timeout 1m;</div><div class="line">    proxy_pass example.com:12345;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen 53 udp;</div><div class="line">    proxy_responses 1;</div><div class="line">    proxy_timeout 20s;</div><div class="line">    proxy_pass dns.example.com:53;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen [::1]:12345;</div><div class="line">    proxy_pass unix:/tmp/stream.socket;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<pre><code>ngx_stream_proxy_module的proxy_pass：
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">	server &#123;</div><div class="line">    listen      80;</div><div class="line">    server_name www.test.com;</div><div class="line"></div><div class="line">    // 正常代理，不修改后端url的</div><div class="line">    location /some/path/ &#123;</div><div class="line">        proxy_pass http://127.0.0.1;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //修改后端url地址的代理（本例后端地址中，最后带了一个斜线)</div><div class="line">    location /testb &#123;</div><div class="line">        proxy_pass http://www.other.com:8801/;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //使用 if in location</div><div class="line">    location /google &#123;</div><div class="line">        if ( $geoip_country_code ~ (RU|CN) ) &#123;</div><div class="line">            proxy_pass http://www.google.hk;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location /yongfu/ &#123;</div><div class="line">        # 没有匹配 limit_except 的，代理到 unix:/tmp/backend.socket:/uri/</div><div class="line">        proxy_pass http://unix:/tmp/backend.socket:/uri/;;</div><div class="line"></div><div class="line">        # 匹配到请求方法为: PUT or DELETE, 代理到9080</div><div class="line">        limit_except PUT DELETE &#123;</div><div class="line">            proxy_pass http://127.0.0.1:9080;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>结果</li>
+</ol>
+<figure class="highlight plain"><figcaption><span>&#123;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">    listen      80;</div><div class="line">    server_name www.test.com;</div><div class="line"></div><div class="line">    # 情形A</div><div class="line">    # 访问 http://www.test.com/testa/aaaa</div><div class="line">    # 后端的request_uri为: /testa/aaaa</div><div class="line">    location ^~ /testa/ &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形B</div><div class="line">    # 访问 http://www.test.com/testb/bbbb</div><div class="line">    # 后端的request_uri为: /bbbb</div><div class="line">    location ^~ /testb/ &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801/;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形C</div><div class="line">    # 下面这段location是正确的</div><div class="line">    location ~ /testc &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形D</div><div class="line">    # 下面这段location是错误的</div><div class="line">    #</div><div class="line">    # nginx -t 时，会报如下错误: </div><div class="line">    #</div><div class="line">    # nginx: [emerg] &quot;proxy_pass&quot; cannot have URI part in location given by regular </div><div class="line">    # expression, or inside named location, or inside &quot;if&quot; statement, or inside </div><div class="line">    # &quot;limit_except&quot; block in /opt/app/nginx/conf/vhost/test.conf:17</div><div class="line">    # </div><div class="line">    # 当location为正则表达式时，proxy_pass 不能包含URI部分。本例中包含了&quot;/&quot;</div><div class="line">    location ~ /testd &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801/;   # 记住，location为正则表达式时，不能这样写！！！</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形E</div><div class="line">    # 访问 http://www.test.com/ccc/bbbb</div><div class="line">    # 后端的request_uri为: /aaa/ccc/bbbb</div><div class="line">    location /ccc/ &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801/aaa$request_uri;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形F</div><div class="line">    # 访问 http://www.test.com/namea/ddd</div><div class="line">    # 后端的request_uri为: /yongfu?namea=ddd</div><div class="line">    location /namea/ &#123;</div><div class="line">        rewrite    /namea/([^/]+) /yongfu?namea=$1 break;</div><div class="line">        proxy_pass http://127.0.0.1:8801;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形G</div><div class="line">    # 访问 http://www.test.com/nameb/eee</div><div class="line">    # 后端的request_uri为: /yongfu?nameb=eee</div><div class="line">    location /nameb/ &#123;</div><div class="line">        rewrite    /nameb/([^/]+) /yongfu?nameb=$1 break;</div><div class="line">        proxy_pass http://127.0.0.1:8801/;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    access_log /data/logs/www/www.test.com.log;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen      8801;</div><div class="line">    server_name www.test.com;</div><div class="line"></div><div class="line">    root        /data/www/test;</div><div class="line">    index       index.php index.html;</div><div class="line"></div><div class="line">    rewrite ^(.*)$ /test.php?u=$1 last;</div><div class="line"></div><div class="line">    location ~ \.php$ &#123;</div><div class="line">        try_files $uri =404;</div><div class="line">        fastcgi_pass unix:/tmp/php-cgi.sock;</div><div class="line">        fastcgi_index index.php;</div><div class="line">        include fastcgi.conf;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    access_log /data/logs/www/www.test.com.8801.log;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> living </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Nginx： rewrite]]></title>
+      <url>/2017/08/16/Nginx/2017-08-17-nginx-rewirte/</url>
+      <content type="html"><![CDATA[<h2 id="break-last"><a href="#break-last" class="headerlink" title="break ;last"></a>break ;last</h2><p>last： 停止处理后续rewrite指令集，然后对当前重写的新URI在rewrite指令集上重新查找<br>break: 终止当前相同作用域下后面的nginx的配置<br>return: 用于完成对请求的处理。<br>rewrite： 通过正则表达式的使用来改变URI<br>redirect： 将重写后的URI返回给客户端，状态吗：302；临时重定向<br>permanent：将重写后的URI返回给客户端，状态吗：301；永久重定向</p>
+<h2 id="表达符号"><a href="#表达符号" class="headerlink" title="表达符号"></a>表达符号</h2><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>说明</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>～</td>
+<td>区分大小写匹配</td>
+<td></td>
+</tr>
+<tr>
+<td>～*</td>
+<td>不区分大小写匹配</td>
+<td></td>
+</tr>
+<tr>
+<td>!～</td>
+<td>区分大小写，并将结果取反</td>
+<td></td>
+</tr>
+<tr>
+<td>！～*</td>
+<td>不区分大小写匹配，并将结果取反</td>
+</tr>
+</tbody>
+</table>
+<h2 id="判断符号"><a href="#判断符号" class="headerlink" title="判断符号"></a>判断符号</h2><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>说明</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-f</td>
+<td>判断请求的文件是否存在，如果存在，则为true;在其前加上”!”即表示取反</td>
+<td></td>
+</tr>
+<tr>
+<td>-d</td>
+<td>请求的目录是否存在；在其前加上”!”即表示取反</td>
+</tr>
+</tbody>
+</table>
+<p>|-e|    判断请求的目录或文件是否存在，如果存在，则为true。||<br>|-x|    判断当前请求文件是否为可执行文件。||    </p>
+<h3 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h3><table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$args</td>
+<td>变量中存放了请求URL中的请求参数。</td>
+<td>如: arg1=value1&amp;arg2=value2</td>
+</tr>
+<tr>
+<td>$content_length</td>
+<td>http头部中存放了请求头中的Content-length字段</td>
+<td></td>
+</tr>
+<tr>
+<td>$content_type</td>
+<td>http头部中的Content-type字段</td>
+<td></td>
+</tr>
+<tr>
+<td>$document_root</td>
+<td>存放了针对当前请求的根路径</td>
+<td></td>
+</tr>
+<tr>
+<td>$document_uri</td>
+<td>存放了当前请求的URI，并且不包含请求参数。</td>
+<td>如：/server/source</td>
+</tr>
+<tr>
+<td>$host</td>
+<td>请求字段的主机字段</td>
+<td>如：www.lyblog.net</td>
+</tr>
+<tr>
+<td>$http_user_agent</td>
+<td>存放请求的客户端的用户代理信息</td>
+<td></td>
+</tr>
+<tr>
+<td>$http_cookie</td>
+<td>客户端中存在的cookie信息</td>
+</tr>
+<tr>
+<td>$limit_rate</td>
+<td>存放Nginx服务器对网络连接速率的限制，也就是Nginx配置limit_rate指令的配置值</td>
+</tr>
+<tr>
+<td>$remote_addr</td>
+<td>客户端的ip地址</td>
+<td></td>
+</tr>
+<tr>
+<td>$remote_port</td>
+<td>客户端与服务器建立连接的端口</td>
+<td>如：8081</td>
+</tr>
+<tr>
+<td>$remote_user</td>
+<td>存放客户端用户名</td>
+<td></td>
+</tr>
+<tr>
+<td>$request_body_file</td>
+<td>存放了发给后端服务器的本地文件资源的名称</td>
+<td></td>
+</tr>
+<tr>
+<td>$request_method</td>
+<td>存放客户端的请求方式</td>
+<td>如：GET,POST,OPTION等</td>
+</tr>
+<tr>
+<td>$request_filename</td>
+<td>当前请求的资源文件的路径名</td>
+<td></td>
+</tr>
+<tr>
+<td>$request_uri</td>
+<td>当前请求的URI，并且附带请求参数</td>
+<td>如：/server/source?arg1=value1&amp;arg2=value2</td>
+</tr>
+<tr>
+<td>$query_string</td>
+<td>与$args含义相同</td>
+<td></td>
+</tr>
+<tr>
+<td>$scheme</td>
+<td>客户端与服务器请求所用的协议，比如，http,https,ftp等</td>
+<td>如：http</td>
+</tr>
+<tr>
+<td>$server_protocol</td>
+<td>客户端请求的协议版本。</td>
+<td>如：”HTTP/1.0”,”HTTP/1.1”</td>
+</tr>
+<tr>
+<td>$server_addr</td>
+<td>服务器的Ip地址</td>
+<td></td>
+</tr>
+<tr>
+<td>$server_name</td>
+<td>客户端请求到达服务器的名称</td>
+<td></td>
+</tr>
+<tr>
+<td>$server_port</td>
+<td>客户端请求到达服务器的端口号</td>
+<td></td>
+</tr>
+<tr>
+<td>$uri</td>
+<td>与$document_uri含义相同</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+      
+        <categories>
+            
+            <category> living </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+      <title></title>
+      <url>/2017/08/07/Git/2017-08-07/</url>
+      <content type="html"><![CDATA[<hr>
+<p>title: Shell 和 Vim 快捷键<br>date: 2017/8/7 19:45:35<br>thumbnail: <a href="http://img.efraim.me/vim.png" target="_blank" rel="external">http://img.efraim.me/vim.png</a><br>categories: git</p>
+<blockquote>
+<p>长时间重复做一件时间 就很蠢ss</p>
+</blockquote>
+<h2 id="Shell-命令行快捷键"><a href="#Shell-命令行快捷键" class="headerlink" title="Shell 命令行快捷键"></a>Shell 命令行快捷键</h2><p>常用的</p>
+<h3 id="光标移动"><a href="#光标移动" class="headerlink" title="光标移动"></a>光标移动</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ctrl+a</td>
+<td>移动光标到行首</td>
+</tr>
+<tr>
+<td>Ctrl+e</td>
+<td>移动光标到行首</td>
+</tr>
+<tr>
+<td>Ctrl+f</td>
+<td>光标向前移动一个字符</td>
+</tr>
+<tr>
+<td>Ctrl+b</td>
+<td>光标向后移动一个字符</td>
+</tr>
+<tr>
+<td>Alt+f</td>
+<td>光标向前移动一个单词</td>
+</tr>
+<tr>
+<td>Alt+b</td>
+<td>光标向后移动一个单词</td>
+</tr>
+<tr>
+<td>Ctrl+l</td>
+<td>清空屏幕</td>
+</tr>
+</tbody>
+</table>
+<h3 id="文本便捷"><a href="#文本便捷" class="headerlink" title="文本便捷"></a>文本便捷</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ctrl+d</td>
+<td>删除光标位置的字符</td>
+</tr>
+<tr>
+<td>Ctrl+t</td>
+<td>光标位置的字符和前一个字符互换位置</td>
+</tr>
+<tr>
+<td>Ctrl+k</td>
+<td>剪切光标位置到行尾的文本</td>
+</tr>
+<tr>
+<td>Ctrl+y</td>
+<td>把剪切的文本粘贴到光标位置</td>
+</tr>
+<tr>
+<td>Ctrl+w</td>
+<td>删除光标前的一个单词</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Vim-快捷键"><a href="#Vim-快捷键" class="headerlink" title="Vim 快捷键"></a>Vim 快捷键</h2><p>常用的</p>
+<h3 id="光标移动-1"><a href="#光标移动-1" class="headerlink" title="光标移动"></a>光标移动</h3><p>Normal模式</p>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>h,j,k,l</td>
+<td>左/下/上/右</td>
+</tr>
+<tr>
+<td>w</td>
+<td>光标移动下一个单词首位</td>
+</tr>
+<tr>
+<td>b</td>
+<td>光标移动到当前单词首位</td>
+</tr>
+<tr>
+<td>e</td>
+<td>移动到当前单词末尾</td>
+</tr>
+<tr>
+<td>gg</td>
+<td>光标移动到首行</td>
+</tr>
+<tr>
+<td>shift + g</td>
+<td>移动到末行</td>
+</tr>
+<tr>
+<td>num+shift+g</td>
+<td>移动到27行</td>
+</tr>
+</tbody>
+</table>
+<h3 id="插入行"><a href="#插入行" class="headerlink" title="插入行"></a>插入行</h3><table>
+<thead>
+<tr>
+<th>按键</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>o</td>
+<td>光标下一行插入一行</td>
+</tr>
+<tr>
+<td>shift</td>
+<td>光标上一行插入新行</td>
+</tr>
+</tbody>
+</table>
+<h3 id="删除和还原"><a href="#删除和还原" class="headerlink" title="删除和还原"></a>删除和还原</h3><table>
+<thead>
+<tr>
+<th>按键</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>删除光标后一个字符</td>
+</tr>
+<tr>
+<td>shift + x</td>
+<td>删除光标前一个字符</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>删除光标所在行</td>
+</tr>
+<tr>
+<td>de</td>
+<td>删除光标后单词内容</td>
+</tr>
+<tr>
+<td>dw</td>
+<td>同上，并包含空格</td>
+</tr>
+<tr>
+<td>u</td>
+<td>撤销上一个操作</td>
+</tr>
+</tbody>
+</table>
+<h3 id="剪切、复制、粘贴"><a href="#剪切、复制、粘贴" class="headerlink" title="剪切、复制、粘贴"></a>剪切、复制、粘贴</h3><table>
+<thead>
+<tr>
+<th>按键</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>f+’z’</td>
+<td>当前行查找z字符</td>
+</tr>
+<tr>
+<td>F + ‘z’</td>
+<td>前一行查找z字符</td>
+</tr>
+<tr>
+<td>:/word</td>
+<td>全文查找word字符串</td>
+</tr>
+<tr>
+<td>:s/word/replace</td>
+<td>当前行第一个word替换尾repalce</td>
+</tr>
+<tr>
+<td>:%s/word/replace</td>
+<td>全文word替换尾repalce</td>
+</tr>
+<tr>
+<td>:1，50s/word/replace</td>
+<td>第一行、50行间的word替换为repalce</td>
+</tr>
+<tr>
+<td>p</td>
+<td>粘贴文本</td>
+</tr>
+</tbody>
+</table>
+<h3 id="查找和替换"><a href="#查找和替换" class="headerlink" title="查找和替换"></a>查找和替换</h3><h2 id="Vim-交互式教程："><a href="#Vim-交互式教程：" class="headerlink" title="Vim 交互式教程："></a>Vim 交互式教程：</h2><p>Interactive Vim tutorial</p>
+]]></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[来深圳的一个月]]></title>
       <url>/2017/08/05/Living/hello-sz/</url>
       <content type="html"><![CDATA[<p>今天是8.5号<br>已经来深圳一月了</p>
@@ -160,8 +678,112 @@
         
     </entry>
     
+    <entry>
+      <title><![CDATA[使用docker来构建开发环境]]></title>
+      <url>/2017/08/04/docker/2017-08-29-dev/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>docker 开发流程</p>
+</blockquote>
+<h2 id="0-概述"><a href="#0-概述" class="headerlink" title="0 概述"></a>0 概述</h2><pre><code>做开发的人 都经历过安装和配置n次开发环境，神烦。
+</code></pre><p>docker：</p>
+<pre><code>- 跨平台
+- 端口映射，预览网页
+- 卷映射，项目更改
+- 可以配置的镜像
+</code></pre><h2 id="1-构建环境-docker"><a href="#1-构建环境-docker" class="headerlink" title="1. 构建环境:docker"></a>1. 构建环境:docker</h2><h2 id="2-下载基础镜像"><a href="#2-下载基础镜像" class="headerlink" title="2. 下载基础镜像"></a>2. 下载基础镜像</h2><h2 id="3-构建开发环境"><a href="#3-构建开发环境" class="headerlink" title="3. 构建开发环境"></a>3. 构建开发环境</h2><h3 id="1-替换阿里云的源"><a href="#1-替换阿里云的源" class="headerlink" title="1.替换阿里云的源"></a>1.替换阿里云的源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&gt;&gt; echo &apos;&apos; &gt; /etc/apt/sources.list</div><div class="line">&gt;&gt; vi /etc/apt/sources.list </div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse</div></pre></td></tr></table></figure>
+<h3 id="2-安装相关软件"><a href="#2-安装相关软件" class="headerlink" title="2. 安装相关软件"></a>2. 安装相关软件</h3><p>==vim==<br><code>apt-get install vim</code><br><code>apt-get install wget</code><br>一键安装包<br><code>wget -c http://soft.vpser.net/lnmp/lnmp1.4.tar.gz &amp;&amp; tar zxf lnmp1.4.tar.gz &amp;&amp; cd lnmp1.4 &amp;&amp; ./install.sh lnmp</code></p>
+<p>==环境==：</p>
+<ul>
+<li>Mysql： 5.7.18 root root 开启InnoDB</li>
+<li>PHP: 7.0.21</li>
+<li>Nginx: 1.12.1</li>
+</ul>
+<h2 id="4-提交镜像"><a href="#4-提交镜像" class="headerlink" title="4. 提交镜像"></a>4. 提交镜像</h2><p><code>docker commit ed01d214000c ld_dev:7</code></p>
+<h2 id="5-导出镜像"><a href="#5-导出镜像" class="headerlink" title="5. 导出镜像"></a>5. 导出镜像</h2><p><code>docker export ed01d214000c -o my_dev-7</code><br>导出来之后，其他人就可以使用这个镜像</p>
+]]></content>
+      
+        <categories>
+            
+            <category> dev </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
   
   
+    
+    <entry>
+      <title></title>
+      <url>/2017-08-24-as.html</url>
+      <content type="html"><![CDATA[<h1 id="各种as"><a href="#各种as" class="headerlink" title="各种as"></a>各种as</h1><p>IaaS：基础设施服务，Infrastructure-as-a-service<br>PaaS：平台服务，Platform-as-a-service<br>SaaS：软件服务，Software-as-a-service</p>
+<p>SaaS 是软件的开发、管理、部署都交给第三方，不需要关心技术问题，可以拿来即用。普通用户接触到的互联网服务，几乎都是 SaaS，下面是一些例子。</p>
+<p>客户管理服务 Salesforce<br>团队协同服务 Google Apps<br>储存服务 Box<br>储存服务 Dropbox<br>社交服务 Facebook / Twitter / Instagram</p>
+<p>PaaS 提供软件部署平台（runtime），抽象掉了硬件和操作系统细节，可以无缝地扩展（scaling）。开发者只需要关注自己的业务逻辑，不需要关注底层。下面这些都属于 PaaS。<br>Heroku<br>Google App Engine<br>OpenShift</p>
+<p>IaaS 是云服务的最底层，主要提供一些基础资源。它与 PaaS 的区别是，用户需要自己控制底层，实现基础设施的使用逻辑。下面这些都属于 IaaS。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title></title>
+      <url>/2017-09-20-id-generate.html</url>
+      <content type="html"><![CDATA[<h2 id="ID生成器"><a href="#ID生成器" class="headerlink" title="ID生成器"></a>ID生成器</h2><ul>
+<li>易用性</li>
+<li>直观性</li>
+<li>唯一性</li>
+</ul>
+<h3 id="1-uuid"><a href="#1-uuid" class="headerlink" title="1. uuid()"></a>1. uuid()</h3><p>优点：</p>
+<pre><code>- 方便、简单
+</code></pre><p>缺点：</p>
+<pre><code>-     字符串较长
+-  性能开销大一些
+-  无意义
+</code></pre><h3 id="2-数据库主键自增"><a href="#2-数据库主键自增" class="headerlink" title="2. 数据库主键自增"></a>2. 数据库主键自增</h3><p>MySQL的 AUTO_INCREMENT<br>Postgres SEQUENCE</p>
+<p>优点：</p>
+<pre><code>- 方便、简单
+</code></pre><p>缺点：</p>
+<pre><code>- 并发时锁的问题
+</code></pre><h3 id="3-给每个服务器分配一个唯一前缀"><a href="#3-给每个服务器分配一个唯一前缀" class="headerlink" title="3. 给每个服务器分配一个唯一前缀"></a>3. 给每个服务器分配一个唯一前缀</h3><h3 id="4-预取ID，预先生成ID-需要去取即可。可能造成ID的不连续性"><a href="#4-预取ID，预先生成ID-需要去取即可。可能造成ID的不连续性" class="headerlink" title="4. 预取ID，预先生成ID 需要去取即可。可能造成ID的不连续性"></a>4. 预取ID，预先生成ID 需要去取即可。可能造成ID的不连续性</h3><h3 id="5-打乱ID"><a href="#5-打乱ID" class="headerlink" title="5. 打乱ID"></a>5. 打乱ID</h3><h3 id="6-Twitter-Snowflake-划分区间并行生成"><a href="#6-Twitter-Snowflake-划分区间并行生成" class="headerlink" title="6. Twitter Snowflake 划分区间并行生成"></a>6. Twitter Snowflake 划分区间并行生成</h3><h3 id="7-应用里面生成uuid，优点：性能好。-缺点：id比较长"><a href="#7-应用里面生成uuid，优点：性能好。-缺点：id比较长" class="headerlink" title="7. 应用里面生成uuid，优点：性能好。 缺点：id比较长"></a>7. 应用里面生成uuid，优点：性能好。 缺点：id比较长</h3>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[python]]></title>
+      <url>/2017-09-13-python.html</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>Python基本</p>
+</blockquote>
+<h2 id="1-输入和输出"><a href="#1-输入和输出" class="headerlink" title="1. 输入和输出"></a>1. 输入和输出</h2><p><code>print()</code><br><code>input()</code></p>
+<h2 id="2-数据类型"><a href="#2-数据类型" class="headerlink" title="2 数据类型"></a>2 数据类型</h2><ul>
+<li>整型：任意大小</li>
+<li>浮点数： 科学计数法</li>
+<li>字符串：部分单／双引号</li>
+<li>布尔值：True／False</li>
+<li>空值：None</li>
+<li>list：数组（非索引数组）ex：[‘tom’]</li>
+<li>tuple：元组（一旦设定值，不能修改）.ex(‘tom’,’bob)</li>
+<li>dict: map（key-value）。判断key是否存在：map.get(‘key’). 2. d.get(‘key’,-1)</li>
+<li>set: 不重复key的集合。<h2 id="3-条件判断"><a href="#3-条件判断" class="headerlink" title="3. 条件判断"></a>3. 条件判断</h2><ol>
+<li>if else:</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">age = 3</div><div class="line">if age &gt;= 18:</div><div class="line">    print(&apos;your age is&apos;, age)</div><div class="line">    print(&apos;adult&apos;)</div><div class="line">else:</div><div class="line">    print(&apos;your age is&apos;, age)</div><div class="line">    print(&apos;teenager&apos;)</div></pre></td></tr></table></figure>
+<h2 id="4-循环"><a href="#4-循环" class="headerlink" title="4. 循环"></a>4. 循环</h2><ol>
+<li>for v in [list/tumple／string] </li>
+<li>while／while else </li>
+</ol>
+<h2 id="5-字符串"><a href="#5-字符串" class="headerlink" title="5.字符串"></a>5.字符串</h2><ul>
+<li>连接： *</li>
+<li>重复输出： a*2</li>
+<li>通过索引获取字符串的字符： a[1]</li>
+<li>截取部分字符串： a[1:4]</li>
+<li>判断是否包含给定字符：’h’ in a／／ not in</li>
+<li>原始字符串: r/R</li>
+<li>格式化字符串： %；<code>print &quot;My name is %s and weight is %d kg!&quot; % (&#39;Zara&#39;, 21)</code></li>
+</ul>
+]]></content>
+    </entry>
     
   
 </search>
