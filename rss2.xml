@@ -8,8 +8,25 @@
     <atom:link href="/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 05 Nov 2017 14:18:11 GMT</pubDate>
+    <pubDate>Sun, 05 Nov 2017 15:32:26 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>构建Laravel环境</title>
+      <link>http://efraim.me/2017/11/05/laravel-dev-env/</link>
+      <guid>http://efraim.me/2017/11/05/laravel-dev-env/</guid>
+      <pubDate>Sun, 05 Nov 2017 15:02:28 GMT</pubDate>
+      <description>
+      
+        
+        
+          &lt;h2 id=&quot;Homestead&quot;&gt;&lt;a href=&quot;#Homestead&quot; class=&quot;headerlink&quot; title=&quot;Homestead&quot;&gt;&lt;/a&gt;Homestead&lt;/h2&gt;&lt;h3 id=&quot;1-环境基本&quot;&gt;&lt;a href=&quot;#1-环境基本&quot; class=&quot;head
+        
+      
+      </description>
+      
+      <comments>http://efraim.me/2017/11/05/laravel-dev-env/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>jQuery对象和DOM对象</title>
@@ -28,6 +45,26 @@
       </description>
       
       <comments>http://efraim.me/2017/09/07/FE/2017-09-07-dom-jquery-object/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>使用docker来构建开发环境</title>
+      <link>http://efraim.me/2017/08/29/docker/2017-08-29-dev/</link>
+      <guid>http://efraim.me/2017/08/29/docker/2017-08-29-dev/</guid>
+      <pubDate>Tue, 29 Aug 2017 11:45:35 GMT</pubDate>
+      <description>
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;docker 开发流程&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;0-概述&quot;&gt;&lt;a href=&quot;#0-概述&quot; class=&quot;headerlink&quot; title=&quot;0 概述&quot;&gt;&lt;/a&gt;0 概述&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;做开发的人 都经
+        
+      
+      </description>
+      
+      <comments>http://efraim.me/2017/08/29/docker/2017-08-29-dev/#disqus_thread</comments>
     </item>
     
     <item>
@@ -138,26 +175,6 @@
       </description>
       
       <comments>http://efraim.me/2017/08/04/Living/travel-of-yunan/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>使用docker来构建开发环境</title>
-      <link>http://efraim.me/2017/08/04/docker/2017-08-29-dev/</link>
-      <guid>http://efraim.me/2017/08/04/docker/2017-08-29-dev/</guid>
-      <pubDate>Fri, 04 Aug 2017 11:45:35 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;blockquote&gt;
-&lt;p&gt;docker 开发流程&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;0-概述&quot;&gt;&lt;a href=&quot;#0-概述&quot; class=&quot;headerlink&quot; title=&quot;0 概述&quot;&gt;&lt;/a&gt;0 概述&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;做开发的人 都经
-        
-      
-      </description>
-      
-      <comments>http://efraim.me/2017/08/04/docker/2017-08-29-dev/#disqus_thread</comments>
     </item>
     
   </channel>
