@@ -88,23 +88,6 @@
     </item>
     
     <item>
-      <title>Nginx： 正向与反向代理</title>
-      <link>http://efraim.me/2017/08/16/Nginx/2017-08-16-nginx-proxy/</link>
-      <guid>http://efraim.me/2017/08/16/Nginx/2017-08-16-nginx-proxy/</guid>
-      <pubDate>Wed, 16 Aug 2017 11:45:35 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;h1 id=&quot;Nginx：-正向与反向代理&quot;&gt;&lt;a href=&quot;#Nginx：-正向与反向代理&quot; class=&quot;headerlink&quot; title=&quot;Nginx： 正向与反向代理&quot;&gt;&lt;/a&gt;Nginx： 正向与反向代理&lt;/h1&gt;&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot;
-        
-      
-      </description>
-      
-      <comments>http://efraim.me/2017/08/16/Nginx/2017-08-16-nginx-proxy/#disqus_thread</comments>
-    </item>
-    
-    <item>
       <title>Nginx： rewrite</title>
       <link>http://efraim.me/2017/08/16/Nginx/2017-08-17-nginx-rewirte/</link>
       <guid>http://efraim.me/2017/08/16/Nginx/2017-08-17-nginx-rewirte/</guid>
@@ -122,59 +105,40 @@
     </item>
     
     <item>
-      <title></title>
-      <link>http://efraim.me/2017/08/07/Git/2017-08-07/</link>
-      <guid>http://efraim.me/2017/08/07/Git/2017-08-07/</guid>
-      <pubDate>Mon, 07 Aug 2017 13:41:48 GMT</pubDate>
+      <title>Nginx： 正向与反向代理</title>
+      <link>http://efraim.me/2017/08/16/Nginx/2017-08-16-nginx-proxy/</link>
+      <guid>http://efraim.me/2017/08/16/Nginx/2017-08-16-nginx-proxy/</guid>
+      <pubDate>Wed, 16 Aug 2017 11:45:35 GMT</pubDate>
       <description>
       
         
         
-          &lt;hr&gt;
-&lt;p&gt;title: Shell 和 Vim 快捷键&lt;br&gt;date: 2017/8/7 19:45:35&lt;br&gt;thumbnail: &lt;a href=&quot;http://img.efraim.me/vim.png&quot; target=&quot;_blank&quot; rel=&quot;external
+          &lt;h1 id=&quot;Nginx：-正向与反向代理&quot;&gt;&lt;a href=&quot;#Nginx：-正向与反向代理&quot; class=&quot;headerlink&quot; title=&quot;Nginx： 正向与反向代理&quot;&gt;&lt;/a&gt;Nginx： 正向与反向代理&lt;/h1&gt;&lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot;
+        
+      
+      </description>
+      
+      <comments>http://efraim.me/2017/08/16/Nginx/2017-08-16-nginx-proxy/#disqus_thread</comments>
+    </item>
+    
+    <item>
+      <title>Shell 和 Vim 快捷键</title>
+      <link>http://efraim.me/2017/08/07/Git/2017-08-07/</link>
+      <guid>http://efraim.me/2017/08/07/Git/2017-08-07/</guid>
+      <pubDate>Mon, 07 Aug 2017 11:45:35 GMT</pubDate>
+      <description>
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;长时间重复做一件时间 就很蠢ss&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;Shell-命令行快捷键&quot;&gt;&lt;a href=&quot;#Shell-命令行快捷键&quot; class=&quot;headerlink&quot; title=&quot;Shell 命令行快捷键&quot;&gt;&lt;/a
         
       
       </description>
       
       <comments>http://efraim.me/2017/08/07/Git/2017-08-07/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>来深圳的一个月</title>
-      <link>http://efraim.me/2017/08/05/Living/hello-sz/</link>
-      <guid>http://efraim.me/2017/08/05/Living/hello-sz/</guid>
-      <pubDate>Sat, 05 Aug 2017 11:45:35 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;p&gt;今天是8.5号&lt;br&gt;已经来深圳一月了&lt;/p&gt;
-&lt;h3 id=&quot;毕业了&quot;&gt;&lt;a href=&quot;#毕业了&quot; class=&quot;headerlink&quot; title=&quot;毕业了&quot;&gt;&lt;/a&gt;毕业了&lt;/h3&gt;&lt;p&gt;回首毕业时&lt;br&gt;嬉笑怒骂、无比欢乐&lt;br&gt;无法返回的青春时光&lt;/p&gt;
-&lt;p&gt;
-        
-      
-      </description>
-      
-      <comments>http://efraim.me/2017/08/05/Living/hello-sz/#disqus_thread</comments>
-    </item>
-    
-    <item>
-      <title>毕业旅行--彩云之南</title>
-      <link>http://efraim.me/2017/08/04/Living/travel-of-yunan/</link>
-      <guid>http://efraim.me/2017/08/04/Living/travel-of-yunan/</guid>
-      <pubDate>Fri, 04 Aug 2017 11:45:35 GMT</pubDate>
-      <description>
-      
-        
-        
-          &lt;p&gt;好不容易和又又出去旅游一趟&lt;br&gt;在此记录一下&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&quot;第一天（20号）&quot;&gt;&lt;a href=&quot;#第一天（20号）&quot; class=&quot;headerlink&quot; title=&quot;第一天（20号）&quot;&gt;&lt;/a&gt;第一天（20号）&lt;/h2&gt;&lt;h3 id=&quot;早上&quot;&gt;&lt;
-        
-      
-      </description>
-      
-      <comments>http://efraim.me/2017/08/04/Living/travel-of-yunan/#disqus_thread</comments>
     </item>
     
   </channel>

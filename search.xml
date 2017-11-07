@@ -146,64 +146,6 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Nginx： 正向与反向代理]]></title>
-      <url>/2017/08/16/Nginx/2017-08-16-nginx-proxy/</url>
-      <content type="html"><![CDATA[<h1 id="Nginx：-正向与反向代理"><a href="#Nginx：-正向与反向代理" class="headerlink" title="Nginx： 正向与反向代理"></a>Nginx： 正向与反向代理</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="0x01-概念"><a href="#0x01-概念" class="headerlink" title="0x01 概念"></a>0x01 概念</h3><p>正向代理</p>
-<blockquote>
-<p>客户端A -&gt;（C）-&gt;B 通过C代理。<br>注意：A知道自己要访问B<br>例子： A：你的手机<br>           B：Google<br>            C：你的VPN</p>
-</blockquote>
-<p>反向代理：</p>
-<blockquote>
-<p>客户端A -&gt; B –&gt;C<br>注意：A要访问B的资源，但该资源其实在C服务器上，B取到该资源后，再返回给A<br>例子：A：用餐者<br>          B：点菜员<br>          C：厨师</p>
-</blockquote>
-<h3 id="0x02-Nginx的代理模式"><a href="#0x02-Nginx的代理模式" class="headerlink" title="0x02 Nginx的代理模式"></a>0x02 Nginx的代理模式</h3><p>Nginx支持正向代理和反向代理。不支持TCP隧道代理，所以不能代理HTTPS。</p>
-<h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><ol>
-<li>proxy_pass 根路径／问题</li>
-</ol>
-<p>第一种：<br><code>location ^~ /static/ 
-{ 
-    proxy_set_header Host a.com; 
-    proxy_pass http://b.com/; 
-}</code><br>上述代理结果：<br>    a.com/static/demo.png =&gt; b.com/demo.png</p>
-<p>第二种：<br><code>location ^~ /static/ 
-{ 
-    proxy_set_header Host a.com; 
-    proxy_pass http://b.com; 
-}</code><br>注意proxy_pass b.com后面没有’/‘</p>
-<p>代理结果：<br>    a.com/static/demo.png =&gt; b.com/static/demo.png</p>
-<pre><code>第一种也可以通过rewite来实现
-</code></pre><ol>
-<li>proxy_pass variable ；通过变量传递host时的问题<br> 通过变量传递host时，注意不能有URI，若有，参数不能传递过去</li>
-</ol>
-<pre><code>### 两个proxy_pass
-
-1. proxy_pass
-    ngx_http_proxy_module的proxy_pass：
-    ngx_stream_proxy_module的proxy_pass：
-2. 区别
-    ngx_http_proxy_module的proxy_pass：只能用于server段，可以理解为端口转发
-    ngx_stream_proxy_module的proxy_pass：在 location, if in location, limit_except段。
-3. 用法：
-</code></pre><p>ngx_http_proxy_module的proxy_pass：</p>
-<figure class="highlight plain"><figcaption><span>&#123;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">    listen 127.0.0.1:12345;</div><div class="line">    proxy_pass 127.0.0.1:8080;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen 12345;</div><div class="line">    proxy_connect_timeout 1s;</div><div class="line">    proxy_timeout 1m;</div><div class="line">    proxy_pass example.com:12345;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen 53 udp;</div><div class="line">    proxy_responses 1;</div><div class="line">    proxy_timeout 20s;</div><div class="line">    proxy_pass dns.example.com:53;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen [::1]:12345;</div><div class="line">    proxy_pass unix:/tmp/stream.socket;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<pre><code>ngx_stream_proxy_module的proxy_pass：
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">	server &#123;</div><div class="line">    listen      80;</div><div class="line">    server_name www.test.com;</div><div class="line"></div><div class="line">    // 正常代理，不修改后端url的</div><div class="line">    location /some/path/ &#123;</div><div class="line">        proxy_pass http://127.0.0.1;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //修改后端url地址的代理（本例后端地址中，最后带了一个斜线)</div><div class="line">    location /testb &#123;</div><div class="line">        proxy_pass http://www.other.com:8801/;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //使用 if in location</div><div class="line">    location /google &#123;</div><div class="line">        if ( $geoip_country_code ~ (RU|CN) ) &#123;</div><div class="line">            proxy_pass http://www.google.hk;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location /yongfu/ &#123;</div><div class="line">        # 没有匹配 limit_except 的，代理到 unix:/tmp/backend.socket:/uri/</div><div class="line">        proxy_pass http://unix:/tmp/backend.socket:/uri/;;</div><div class="line"></div><div class="line">        # 匹配到请求方法为: PUT or DELETE, 代理到9080</div><div class="line">        limit_except PUT DELETE &#123;</div><div class="line">            proxy_pass http://127.0.0.1:9080;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>结果</li>
-</ol>
-<figure class="highlight plain"><figcaption><span>&#123;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">    listen      80;</div><div class="line">    server_name www.test.com;</div><div class="line"></div><div class="line">    # 情形A</div><div class="line">    # 访问 http://www.test.com/testa/aaaa</div><div class="line">    # 后端的request_uri为: /testa/aaaa</div><div class="line">    location ^~ /testa/ &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形B</div><div class="line">    # 访问 http://www.test.com/testb/bbbb</div><div class="line">    # 后端的request_uri为: /bbbb</div><div class="line">    location ^~ /testb/ &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801/;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形C</div><div class="line">    # 下面这段location是正确的</div><div class="line">    location ~ /testc &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形D</div><div class="line">    # 下面这段location是错误的</div><div class="line">    #</div><div class="line">    # nginx -t 时，会报如下错误: </div><div class="line">    #</div><div class="line">    # nginx: [emerg] &quot;proxy_pass&quot; cannot have URI part in location given by regular </div><div class="line">    # expression, or inside named location, or inside &quot;if&quot; statement, or inside </div><div class="line">    # &quot;limit_except&quot; block in /opt/app/nginx/conf/vhost/test.conf:17</div><div class="line">    # </div><div class="line">    # 当location为正则表达式时，proxy_pass 不能包含URI部分。本例中包含了&quot;/&quot;</div><div class="line">    location ~ /testd &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801/;   # 记住，location为正则表达式时，不能这样写！！！</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形E</div><div class="line">    # 访问 http://www.test.com/ccc/bbbb</div><div class="line">    # 后端的request_uri为: /aaa/ccc/bbbb</div><div class="line">    location /ccc/ &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801/aaa$request_uri;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形F</div><div class="line">    # 访问 http://www.test.com/namea/ddd</div><div class="line">    # 后端的request_uri为: /yongfu?namea=ddd</div><div class="line">    location /namea/ &#123;</div><div class="line">        rewrite    /namea/([^/]+) /yongfu?namea=$1 break;</div><div class="line">        proxy_pass http://127.0.0.1:8801;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形G</div><div class="line">    # 访问 http://www.test.com/nameb/eee</div><div class="line">    # 后端的request_uri为: /yongfu?nameb=eee</div><div class="line">    location /nameb/ &#123;</div><div class="line">        rewrite    /nameb/([^/]+) /yongfu?nameb=$1 break;</div><div class="line">        proxy_pass http://127.0.0.1:8801/;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    access_log /data/logs/www/www.test.com.log;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen      8801;</div><div class="line">    server_name www.test.com;</div><div class="line"></div><div class="line">    root        /data/www/test;</div><div class="line">    index       index.php index.html;</div><div class="line"></div><div class="line">    rewrite ^(.*)$ /test.php?u=$1 last;</div><div class="line"></div><div class="line">    location ~ \.php$ &#123;</div><div class="line">        try_files $uri =404;</div><div class="line">        fastcgi_pass unix:/tmp/php-cgi.sock;</div><div class="line">        fastcgi_index index.php;</div><div class="line">        include fastcgi.conf;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    access_log /data/logs/www/www.test.com.8801.log;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-]]></content>
-      
-        <categories>
-            
-            <category> living </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Nginx： rewrite]]></title>
       <url>/2017/08/16/Nginx/2017-08-17-nginx-rewirte/</url>
       <content type="html"><![CDATA[<h2 id="break-last"><a href="#break-last" class="headerlink" title="break ;last"></a>break ;last</h2><p>last： 停止处理后续rewrite指令集，然后对当前重写的新URI在rewrite指令集上重新查找<br>break: 终止当前相同作用域下后面的nginx的配置<br>return: 用于完成对请求的处理。<br>rewrite： 通过正则表达式的使用来改变URI<br>redirect： 将重写后的URI返回给客户端，状态吗：302；临时重定向<br>permanent：将重写后的URI返回给客户端，状态吗：301；永久重定向</p>
@@ -393,11 +335,67 @@
     </entry>
     
     <entry>
-      <title></title>
-      <url>/2017/08/07/Git/2017-08-07/</url>
-      <content type="html"><![CDATA[<hr>
-<p>title: Shell 和 Vim 快捷键<br>date: 2017/8/7 19:45:35<br>thumbnail: <a href="http://img.efraim.me/vim.png" target="_blank" rel="external">http://img.efraim.me/vim.png</a><br>categories: git</p>
+      <title><![CDATA[Nginx： 正向与反向代理]]></title>
+      <url>/2017/08/16/Nginx/2017-08-16-nginx-proxy/</url>
+      <content type="html"><![CDATA[<h1 id="Nginx：-正向与反向代理"><a href="#Nginx：-正向与反向代理" class="headerlink" title="Nginx： 正向与反向代理"></a>Nginx： 正向与反向代理</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="0x01-概念"><a href="#0x01-概念" class="headerlink" title="0x01 概念"></a>0x01 概念</h3><p>正向代理</p>
 <blockquote>
+<p>客户端A -&gt;（C）-&gt;B 通过C代理。<br>注意：A知道自己要访问B<br>例子： A：你的手机<br>           B：Google<br>            C：你的VPN</p>
+</blockquote>
+<p>反向代理：</p>
+<blockquote>
+<p>客户端A -&gt; B –&gt;C<br>注意：A要访问B的资源，但该资源其实在C服务器上，B取到该资源后，再返回给A<br>例子：A：用餐者<br>          B：点菜员<br>          C：厨师</p>
+</blockquote>
+<h3 id="0x02-Nginx的代理模式"><a href="#0x02-Nginx的代理模式" class="headerlink" title="0x02 Nginx的代理模式"></a>0x02 Nginx的代理模式</h3><p>Nginx支持正向代理和反向代理。不支持TCP隧道代理，所以不能代理HTTPS。</p>
+<h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><ol>
+<li>proxy_pass 根路径／问题</li>
+</ol>
+<p>第一种：<br><code>location ^~ /static/ 
+{ 
+    proxy_set_header Host a.com; 
+    proxy_pass http://b.com/; 
+}</code><br>上述代理结果：<br>    a.com/static/demo.png =&gt; b.com/demo.png</p>
+<p>第二种：<br><code>location ^~ /static/ 
+{ 
+    proxy_set_header Host a.com; 
+    proxy_pass http://b.com; 
+}</code><br>注意proxy_pass b.com后面没有’/‘</p>
+<p>代理结果：<br>    a.com/static/demo.png =&gt; b.com/static/demo.png</p>
+<pre><code>第一种也可以通过rewite来实现
+</code></pre><ol>
+<li>proxy_pass variable ；通过变量传递host时的问题<br> 通过变量传递host时，注意不能有URI，若有，参数不能传递过去</li>
+</ol>
+<pre><code>### 两个proxy_pass
+
+1. proxy_pass
+    ngx_http_proxy_module的proxy_pass：
+    ngx_stream_proxy_module的proxy_pass：
+2. 区别
+    ngx_http_proxy_module的proxy_pass：只能用于server段，可以理解为端口转发
+    ngx_stream_proxy_module的proxy_pass：在 location, if in location, limit_except段。
+3. 用法：
+</code></pre><p>ngx_http_proxy_module的proxy_pass：</p>
+<figure class="highlight plain"><figcaption><span>&#123;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">    listen 127.0.0.1:12345;</div><div class="line">    proxy_pass 127.0.0.1:8080;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen 12345;</div><div class="line">    proxy_connect_timeout 1s;</div><div class="line">    proxy_timeout 1m;</div><div class="line">    proxy_pass example.com:12345;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen 53 udp;</div><div class="line">    proxy_responses 1;</div><div class="line">    proxy_timeout 20s;</div><div class="line">    proxy_pass dns.example.com:53;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen [::1]:12345;</div><div class="line">    proxy_pass unix:/tmp/stream.socket;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<pre><code>ngx_stream_proxy_module的proxy_pass：
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">	server &#123;</div><div class="line">    listen      80;</div><div class="line">    server_name www.test.com;</div><div class="line"></div><div class="line">    // 正常代理，不修改后端url的</div><div class="line">    location /some/path/ &#123;</div><div class="line">        proxy_pass http://127.0.0.1;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //修改后端url地址的代理（本例后端地址中，最后带了一个斜线)</div><div class="line">    location /testb &#123;</div><div class="line">        proxy_pass http://www.other.com:8801/;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //使用 if in location</div><div class="line">    location /google &#123;</div><div class="line">        if ( $geoip_country_code ~ (RU|CN) ) &#123;</div><div class="line">            proxy_pass http://www.google.hk;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location /yongfu/ &#123;</div><div class="line">        # 没有匹配 limit_except 的，代理到 unix:/tmp/backend.socket:/uri/</div><div class="line">        proxy_pass http://unix:/tmp/backend.socket:/uri/;;</div><div class="line"></div><div class="line">        # 匹配到请求方法为: PUT or DELETE, 代理到9080</div><div class="line">        limit_except PUT DELETE &#123;</div><div class="line">            proxy_pass http://127.0.0.1:9080;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>结果</li>
+</ol>
+<figure class="highlight plain"><figcaption><span>&#123;</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">    listen      80;</div><div class="line">    server_name www.test.com;</div><div class="line"></div><div class="line">    # 情形A</div><div class="line">    # 访问 http://www.test.com/testa/aaaa</div><div class="line">    # 后端的request_uri为: /testa/aaaa</div><div class="line">    location ^~ /testa/ &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形B</div><div class="line">    # 访问 http://www.test.com/testb/bbbb</div><div class="line">    # 后端的request_uri为: /bbbb</div><div class="line">    location ^~ /testb/ &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801/;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形C</div><div class="line">    # 下面这段location是正确的</div><div class="line">    location ~ /testc &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形D</div><div class="line">    # 下面这段location是错误的</div><div class="line">    #</div><div class="line">    # nginx -t 时，会报如下错误: </div><div class="line">    #</div><div class="line">    # nginx: [emerg] &quot;proxy_pass&quot; cannot have URI part in location given by regular </div><div class="line">    # expression, or inside named location, or inside &quot;if&quot; statement, or inside </div><div class="line">    # &quot;limit_except&quot; block in /opt/app/nginx/conf/vhost/test.conf:17</div><div class="line">    # </div><div class="line">    # 当location为正则表达式时，proxy_pass 不能包含URI部分。本例中包含了&quot;/&quot;</div><div class="line">    location ~ /testd &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801/;   # 记住，location为正则表达式时，不能这样写！！！</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形E</div><div class="line">    # 访问 http://www.test.com/ccc/bbbb</div><div class="line">    # 后端的request_uri为: /aaa/ccc/bbbb</div><div class="line">    location /ccc/ &#123;</div><div class="line">        proxy_pass http://127.0.0.1:8801/aaa$request_uri;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形F</div><div class="line">    # 访问 http://www.test.com/namea/ddd</div><div class="line">    # 后端的request_uri为: /yongfu?namea=ddd</div><div class="line">    location /namea/ &#123;</div><div class="line">        rewrite    /namea/([^/]+) /yongfu?namea=$1 break;</div><div class="line">        proxy_pass http://127.0.0.1:8801;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    # 情形G</div><div class="line">    # 访问 http://www.test.com/nameb/eee</div><div class="line">    # 后端的request_uri为: /yongfu?nameb=eee</div><div class="line">    location /nameb/ &#123;</div><div class="line">        rewrite    /nameb/([^/]+) /yongfu?nameb=$1 break;</div><div class="line">        proxy_pass http://127.0.0.1:8801/;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    access_log /data/logs/www/www.test.com.log;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line">    listen      8801;</div><div class="line">    server_name www.test.com;</div><div class="line"></div><div class="line">    root        /data/www/test;</div><div class="line">    index       index.php index.html;</div><div class="line"></div><div class="line">    rewrite ^(.*)$ /test.php?u=$1 last;</div><div class="line"></div><div class="line">    location ~ \.php$ &#123;</div><div class="line">        try_files $uri =404;</div><div class="line">        fastcgi_pass unix:/tmp/php-cgi.sock;</div><div class="line">        fastcgi_index index.php;</div><div class="line">        include fastcgi.conf;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    access_log /data/logs/www/www.test.com.8801.log;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> living </category>
+            
+        </categories>
+        
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Shell 和 Vim 快捷键]]></title>
+      <url>/2017/08/07/Git/2017-08-07/</url>
+      <content type="html"><![CDATA[<blockquote>
 <p>长时间重复做一件时间 就很蠢ss</p>
 </blockquote>
 <h2 id="Shell-命令行快捷键"><a href="#Shell-命令行快捷键" class="headerlink" title="Shell 命令行快捷键"></a>Shell 命令行快捷键</h2><p>常用的</p>
@@ -602,161 +600,9 @@
 <h3 id="查找和替换"><a href="#查找和替换" class="headerlink" title="查找和替换"></a>查找和替换</h3><h2 id="Vim-交互式教程："><a href="#Vim-交互式教程：" class="headerlink" title="Vim 交互式教程："></a>Vim 交互式教程：</h2><p>Interactive Vim tutorial</p>
 ]]></content>
       
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[来深圳的一个月]]></title>
-      <url>/2017/08/05/Living/hello-sz/</url>
-      <content type="html"><![CDATA[<p>今天是8.5号<br>已经来深圳一月了</p>
-<h3 id="毕业了"><a href="#毕业了" class="headerlink" title="毕业了"></a>毕业了</h3><p>回首毕业时<br>嬉笑怒骂、无比欢乐<br>无法返回的青春时光</p>
-<p>回忆起<br>宿舍通宵的复习、备考、做小抄、调侃<br>一起打篮球比赛、3v3篮球赛<br>打累了 坐在篮球场上聊天<br>一起在宿舍打游戏</p>
-<p>一进宿舍<br>师傅在座位上打游戏、看B站、莫名的大笑<br>广哥一本正经的学习、规划人生、看剧、踢腿<br>贺少在床上玩手机、电脑、玩累了就睡觉磨牙<br>那种生活虽然平淡 但是舒适</p>
-<p>时间推着你走向下一个路口<br>在这个路口上<br>突如其来的惊喜<br>我很幸运的遇见了她<br><img src="http://img.efraim.me/blog/photo/girlfriend.jpg" alt="女朋友"></p>
-<p>她让我脱离了单身狗的队伍<br>自从和她在一起后<br>我的人生开始有了方向<br>如果没有和她在一起<br>我极有可能会像《海边的曼切斯特》的男主角一样<br>是她 让我的生活有了色彩 有了活力</p>
-<hr>
-<p>毕业了<br>7.4号坐飞机来深圳 入职上班<br>早上5点 我和她说 广东再见<br>心情很复杂<br>这次真的要离开西安<br>一年半载才能回去<br>带着对过往的不舍、未来的期待<br>坐上了来深圳的飞机</p>
-<p>身份的转变<br>部门同事的离职<br>和家人、朋友、女朋友的分离<br>分离还在热恋的我们、感觉十分不爽<br>让刚来的我 十分不适应</p>
-<hr>
-<h3 id="七月第一个周末"><a href="#七月第一个周末" class="headerlink" title="七月第一个周末"></a>七月第一个周末</h3><p>七月七号</p>
-<h4 id="礼拜六"><a href="#礼拜六" class="headerlink" title="礼拜六"></a>礼拜六</h4><p>早上 </p>
-<p>我们上午去了人才公寓<br>一室一厅一厨一卫 采光也好 感觉真的很棒<br>但是你等不了那么久</p>
-<p> 中午<br>我们去吃了 冒菜<br>很热  吃完汗流夹背<br>吃完 就去休息了</p>
-<p>到了下午4点左右吧<br>我们骑车去了情人路<br>在石头上我跟你聊了很多<br>虽然没去北京 但是我愿意呀<br><img src="http://img.efraim.me/blog/photo/情人路.jpg" alt="情人路"></p>
-<p> 晚上<br>我们去吃了肠粉<br>晚上回去我帮家人做事<br>弄了很久<br>那天基本就结束了</p>
-<h4 id="礼拜天"><a href="#礼拜天" class="headerlink" title="礼拜天"></a>礼拜天</h4><p>早上我们没咋出门<br>到了快中午的时间<br>我们去吃了一家比较坑的店<br>问我们要不要喝茶  后来居然那个茶要收钱 额额额额<br>吃的还是比较饱<br>真是一吃饱就像睡觉</p>
-<p>我们会酒店准备休息<br>看会电视剧<br>看着看着就睡着了</p>
-<p>慢慢的时间就到了我该离开的时间<br>我们好像还是吃的肠粉<br>那家味道还不错</p>
-<p>然后你送我离开<br>真的挺不舍的</p>
-<h3 id="七月第二个周周末"><a href="#七月第二个周周末" class="headerlink" title="七月第二个周周末"></a>七月第二个周周末</h3><p>七月十四</p>
-<h4 id="礼拜六-1"><a href="#礼拜六-1" class="headerlink" title="礼拜六"></a>礼拜六</h4><p>早上<br>我们先是去吃了鱼粉（好像）<br>味道还行吧 你说你的比较淡 就吃我的 </p>
-<p>吃完饭<br>我陪你去看房子<br>先看了第一个房子<br>采光很棒<br>阳台超棒 你也很喜欢<br>但是太乱了<br>你也看上了</p>
-<p>然后去了第二个房子<br>什么也没有<br>虽然房租便宜<br>看完之后 就没去看别的房子</p>
-<p>房子基本就确定第一个<br>房东说下午过来收拾<br>我们就等着来收拾<br>看能收拾成什么样子</p>
-<p>到了中午<br>我记得我们都不怎么饿<br>先是回了房子休息<br>然后2点多<br>我们去吃那家米饭套餐<br>我还是那么喜欢吃面 点的是鸡排面（记得没错的话）<br>吃完饭我们又回去休息？ 记不太清了</p>
-<p>下午的时候<br>房东说收拾好了<br>让我们过去看下怎么样<br>过去看了之后<br>还不错<br>看着舒服多了<br>房东和他岳父把有的没的 基本都弄好了<br>感觉房东还不错<br>然后我们就签了合同<br>弄到了晚上10点钟 才结束</p>
-<p><img src="http://img.efraim.me/blog/photo/小龙虾.JPG" alt="小龙虾"></p>
-<p>我们回到唐家市场<br>都饿了<br>找到了那家肠粉店<br>看见有卖小龙虾<br>相觑一笑<br>就点了<br>感觉还不错<br>还有个店员居然跟我是同乡<br>真的很巧<br>吃完 我们就回去休息</p>
-<h4 id="礼拜天-1"><a href="#礼拜天-1" class="headerlink" title="礼拜天"></a>礼拜天</h4><p>那天有点记不清了<br>我就记得我们下午退房<br>然后拎着行李 去租的房子</p>
-<p>到了房子<br>开始整理<br>我整理了冰箱、抽油烟机<br>你整理厨房、卫生间 很多地方<br>我们大汗淋漓<br>互相看着 就笑了</p>
-<p>收拾结束<br>洗了澡<br>我又到走的时候<br>我们在小区门口的一家店里<br>吃了饭<br>感觉好便宜<br>在学校之外<br>基本我就没吃过这么便宜的<br>味道还行吧</p>
-<p>在准备离开的时候<br>你说你不送我了<br>你很累<br>确实送人离开时的心情 很难受<br>我知道<br>虽然有点小失望 但是想到你会很难受 就释然了<br>最后你还是送我了 开心</p>
-<h3 id="七月的第四周"><a href="#七月的第四周" class="headerlink" title="七月的第四周"></a>七月的第四周</h3><p>七月二十六</p>
-<h4 id="礼拜六-2"><a href="#礼拜六-2" class="headerlink" title="礼拜六"></a>礼拜六</h4><p>这周末终于在房子休息<br>真的很棒<br>礼拜五晚上因为堵车<br>过去的很晚<br>我们都没休息好</p>
-<p>早上<br>我们9点左右<br>在房子里煮了泡面吃<br>感觉还是棒棒的</p>
-<p>中午<br>我们都不饿<br>于是就吃了零食<br>对付过去了</p>
-<p>下午<br>到了2点多<br>我们去看电影《绣春刀》<br>感觉还是不错的 耍刀的时候 挺帅<br>看完电影<br>发现渔女不远<br>我们骑车自行车 过去<br>先去找了IC充值的地方<br>没找到 有点小失望<br>然后我们就去渔女了</p>
-<p>傍晚的时候<br>我们走在沙滩上<br>真的很舒服<br>这个时候 如果  时间停止<br>那该有多好</p>
-<p>呆了一会<br>我们准备回房子<br>路上你说你想吃螺蛳粉<br>我没让你吃 你生气<br>我还生气你一天给我吃的都不是主食呢（当然是开玩笑的）</p>
-<p>做了很久的车<br>我们回到了房子<br>弄了两个菜<br>一个香肠和西红柿 一个土豆丝<br>再加上中午熬的稀饭 也是美美的<br>虽然今天的行程没有按照规划的执行<br>最后结果还是一致的</p>
-<h4 id="礼拜天-2"><a href="#礼拜天-2" class="headerlink" title="礼拜天"></a>礼拜天</h4><p>早上<br>我们干嘛了<br>我就记得弄了果汁<br>吃零食<br>真是 脑子怎么了 现在没想起来<br>反正我们下午去了市场 买菜<br>你还气我找摩拜太墨迹了<br>OK了 下次不这样了</p>
-<p>我们在市场<br>买了虾、蛏子、蔬菜<br>卖完我们就骑车回去<br>为什么要骑车呢（骑车能省8块… 是不是太抠了）</p>
-<p>到房子之后<br>我们就开始整理虾<br>虾线真的很烦 弄了很久<br>清理好之后<br>又又开始炒菜<br>煮虾<br>炒蛏子<br>我突发地想弄葱香虾<br>弄了4盘菜</p>
-<p><img src="http://img.efraim.me/blog/photo/饭.JPG" alt="饭"></p>
-<p>本来还以为回很匆忙<br>上天助我<br>大巴晚点一小时<br>让我不会那么着急的吃饭</p>
-<p>我们吃着饭 吹着风<br>听着歌 说一些有的没的的话<br>真是太棒了</p>
-<p>吃完饭<br>有又到了我走的时候<br>真的很烦<br>我说不用了<br>你最后还是去送我了<br>开心呀</p>
-<hr>
-<p>你要是不喜欢<br>一件钟情的话</p>
-<p>那我们就选择<br>久处不厌吧</p>
-<p><img src="http://img.efraim.me/blog/photo/ours.png" alt="我们"></p>
-<p>能力决定我们把握幸福的程度<br>一起携手吧</p>
-<p><img src="http://img.efraim.me/blog/photo/1201501937477_.pic.jpg" alt="未来"></p>
-]]></content>
-      
         <categories>
             
-            <category> living </category>
-            
-        </categories>
-        
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[毕业旅行--彩云之南]]></title>
-      <url>/2017/08/04/Living/travel-of-yunan/</url>
-      <content type="html"><![CDATA[<p>好不容易和又又出去旅游一趟<br>在此记录一下</p>
-<hr>
-<h2 id="第一天（20号）"><a href="#第一天（20号）" class="headerlink" title="第一天（20号）"></a>第一天（20号）</h2><h3 id="早上"><a href="#早上" class="headerlink" title="早上"></a>早上</h3><p>620号早上6.25的飞机<br>一行的我们 4点多点我们起床<br>叫了辆车 去机场<br><img src="http://img.efraim.me/blog/photo/20-air.png" alt="cat"><br>大概九点左右到机场<br>然后来一个东北男子 忽悠做他的车<br>最后他不见了 坑坑坑<br>我们于是坐大巴 去滇池<br>快到滇池的时候 都有点饿了<br>于是去吃云南最出名的过桥米线</p>
-<p><img src="http://img.efraim.me/blog/photo/米线-1.png" alt="米线"></p>
-<h3 id="中午"><a href="#中午" class="headerlink" title="中午"></a>中午</h3><p>吃完之后 我只想说<br>和我想象中的米线不一样 好吗<br>在西安呆久的我 感觉这也太清淡了</p>
-<h3 id="下午"><a href="#下午" class="headerlink" title="下午"></a>下午</h3><p>不管了<br>吃完饭 我们就前往滇池</p>
-<p><img src="http://img.efraim.me/blog/photo/滇池.png" alt="米线"></p>
-<p>那天天气不好<br>滇池水上有雾 没什么逛的<br>于是我们找到附近有一个<code>云南民族村</code>可以去<br>我们骑着共享单车过去<br>我想说我们终于用到了 <code>学生证</code><br>感觉好亏了 学生证 都没咋用<br><img src="http://img.efraim.me/blog/photo/民族村.png" alt="民族"></p>
-<p>又又总是怪我把猫拍的好看<br>把她拍的不好  —无辜呀我 </p>
-<p><img src="http://img.efraim.me/blog/photo/cat.png" alt="cat"></p>
-<p><img src="http://img.efraim.me/blog/photo/合照.png" alt="民族"></p>
-<p>结束了 云南民族村旅程<br>大概6点多了<br>我们启程去火车站<br>奔波了一天<br>路上大家都累坏了 都睡着了<br><img src="http://img.efraim.me/blog/photo/tired.png" alt="民族tired"></p>
-<p>应该是小胖 在团购软件找了一家饭店<br>味道还不错<br><img src="http://img.efraim.me/blog/photo/20-dinner.png" alt="民族tired"></p>
-<p>吃完饭 去火车站等车<br>准备去丽江</p>
-<hr>
-<h2 id="第二天（21号）"><a href="#第二天（21号）" class="headerlink" title="第二天（21号）"></a>第二天（21号）</h2><p>我们大早上 到丽江<br>就开始被坑的一天<br>首先我们被一个阿姨<br>带着去玩什么 <code>拉市海</code> 坑坑坑</p>
-<h3 id="早上-1"><a href="#早上-1" class="headerlink" title="早上"></a>早上</h3><blockquote>
-<p>去骑马</p>
-</blockquote>
-<p><img src="http://img.efraim.me/blog/photo/21-horse.png" alt="horse"></p>
-<p>骑了一个多小时的马 屁股好疼<br>再不骑马了</p>
-<blockquote>
-<p>划船</p>
-</blockquote>
-<p><img src="http://img.efraim.me/blog/photo/21-boat.png" alt="boat"></p>
-<p>划完船<br>心想 终于结束了<br>已经到中午了</p>
-<p>我们就回丽江古城 吃饭<br>大家都累了<br>在住宿的地方 睡了个午觉</p>
-<p>到4点多的时候 雨停了<br>我们准备去丽江古城里转转</p>
-<p>听朋友说从一个 忠义市场的地方进去 不收古城维护费<br>我们从那里进去了<br>真的是 浓浓的商业气息<br>体验不好</p>
-<p><img src="http://img.efraim.me/blog/photo/21-古城.png" alt="古城"></p>
-<p>我们基本上逛吃逛吃<br>吃虫子…<br><img src="http://img.efraim.me/blog/photo/21-虫子.png" alt="古城"><br><img src="http://img.efraim.me/blog/photo/21-古城-2.png" alt="古城"><br>那时一看都晚上了</p>
-<p>心想 丽江不是艳遇之都嘛<br>虽然我都有女朋友了<br>没机会了、然而她说：你去呀<br>我想说：你心还是大</p>
-<p>我们找了一个叫 <code>水泊梁山</code> 的酒吧<br>要了两瓶 <code>失身酒</code> 味道还行<br>但是后劲挺大的<br><img src="http://img.efraim.me/blog/photo/21-古城-3.png" alt="古城"><br><img src="http://img.efraim.me/blog/photo/酒吧.png" alt="酒吧"></p>
-<p>回到酒店 睡觉<br>这一天结束了</p>
-<hr>
-<h2 id="第三天-22"><a href="#第三天-22" class="headerlink" title="第三天(22)"></a>第三天(22)</h2><p> 我们早上7点<br> 去导游约定的地方<br> 准备去香格里拉<br> <img src="http://img.efraim.me/blog/photo/22-高.png" alt="酒吧"></p>
-<p> 早上一直在车上坐<br> 到一个叫什么观景厕所的地方<br> 休息了下<br>  <img src="http://img.efraim.me/blog/photo/22-合照.png" alt="酒吧"></p>
-<p> 到了中午<br> 导游安排了一顿当地的火锅<br> 味道还行 但不太好的是<br> 我们一桌子 男生比较多<br> 菜不够吃 别的桌子 都还有剩下</p>
-<p> 又又生气的说 跟我们在一起 吃不饱饭</p>
-<p>吃完饭<br>我们去<code>松赞林寺</code> </p>
-<p> <img src="http://img.efraim.me/blog/photo/林.png" alt="林"></p>
-<p>这个地方真的很纯净<br> <img src="http://img.efraim.me/blog/photo/22-林-1.png" alt="林"></p>
-<p>和陌生的人 一起合拍<br> <img src="http://img.efraim.me/blog/photo/IMG_0782.JPG" alt="林"></p>
-<p> 逛完 我们去纳帕海-香格里拉大草原<br> 附一张女朋友笑cry的照片<br>  <img src="http://img.efraim.me/blog/photo/22-cry.png" alt="林"></p>
-<p> <img src="http://img.efraim.me/blog/photo/草原.png" alt="林"></p>
-<p> 转经筒</p>
-<p><img src="http://img.efraim.me/blog/photo/转经筒.png" alt="林"></p>
-<p>转完<br>晚上是导游家里做客 整个晚饭吃的还不错</p>
-<hr>
-<h2 id="第四天（23号）"><a href="#第四天（23号）" class="headerlink" title="第四天（23号）"></a>第四天（23号）</h2><p>在香格里拉的第二天<br>一早上都在逛珠宝店 烦烦烦<br>没什么意思</p>
-<p><img src="http://img.efraim.me/blog/photo/珠宝店.png" alt="珠宝店"><br>逛完珠宝店 在那里吃了难吃的午饭<br>下午去虎跳峡<br><img src="http://img.efraim.me/blog/photo/23-虎跳峡.png" alt="珠宝店"></p>
-<p><img src="http://img.efraim.me/blog/photo/23-虎跳峡-1.png" alt="珠宝店"><br>又又笑的好开心呀<br><img src="http://img.efraim.me/blog/photo/23-hu.png" alt="珠宝店"><br>逛完虎跳峡<br>坐2小时的车 回到丽江<br>本来想6个人去一个饭店吃个炒菜<br>一支没找到<br>最后没吃成 大家心情都不怎么好<br>吃完饭 我们去火车站 准备去大理<br>在这里和小胖他们分开<br><img src="http://img.efraim.me/blog/photo/丽江.png" alt="丽江"><br>应该是8点左右的火车<br>到大理 差不多10点左右<br>出了大理火车站<br>有一位重庆的大叔<br>带着我们去他家的客栈 入住<br>这一天就这样结束了</p>
-<hr>
-<h2 id="第五天（24号）"><a href="#第五天（24号）" class="headerlink" title="第五天（24号）"></a>第五天（24号）</h2><p>早上起床 准备大理一日游<br>准备吃早餐<br>我记得她想吃乳扇<br>买了之后 她说她没说过</p>
-<p><img src="http://img.efraim.me/blog/photo/24-乳扇.png" alt="丽江"></p>
-<p>吃完饭<br>我们去和导游碰头<br>然后先去一个什么 <code>玫瑰花园</code> 的地方（名字记不清了）<br>到地方 拍了花 拍了人</p>
-<p><img src="http://img.efraim.me/blog/photo/24-玫瑰.png" alt="大理"></p>
-<p>然后去喝了下花茶 味道还不错<br>吃了贺少买的鲜花饼（这是我到云南吃到最好吃的鲜花饼）<br>附上自己的丑照<br><img src="http://img.efraim.me/blog/photo/24-自己-1.png" alt="大理"></p>
-<p>下一站： 洱海<br><img src="http://img.efraim.me/blog/photo/24-洱海.png" alt="大理"><br>下一站： 苍山<br><img src="http://img.efraim.me/blog/photo/24-苍山.png" alt="大理"><br>下一站： 品茶<br>这就是个坑<br>一盒茶 要人50 最后10一盒荬了<br>坑坑坑<br>这就不说了 都知道套路了</p>
-<p>下一站： 扎染艺术<br>刚开始感觉一块布 挺贵的<br>然后感受了他们的扎染工艺 过程<br>感觉 买那么贵 也是应该的<br>全手工 耗时又耗力<br><img src="http://img.efraim.me/blog/photo/24-扎染.png" alt="大理"></p>
-<p>下一站： 民族村<br>也没什么意思</p>
-<p>一天旅游行程 基本结束<br>回到城里<br>我们找了家店 吃饭<br>吃完饭我们去洋人街<br><img src="http://img.efraim.me/blog/photo/24-洋人街.png" alt="大理"><br><img src="http://img.efraim.me/blog/photo/24-洋人街-1.png" alt="大理"></p>
-<p>大理行程结束<br>经过商量<br>我们准备坐晚上的火车去昆明<br><img src="http://img.efraim.me/blog/photo/24-大理.png" alt="大理"></p>
-<p>在这里<br>又又快被气炸了<br>没有火车票啦<br>我就说 我们等发车前半小时 绝对有票会放出来<br>结果没有<br>我们4个人大半夜就在火车站 晾着<br><img src="http://img.efraim.me/blog/photo/24-火车站.png" alt="大理"><br>我们就等到<br>我们没办法<br>最后找到一个黑车<br>拉我们去昆明<br>又又气的不想理我<br>确实我有时候 太不靠谱了<br>我们坐黑车到昆明的时候<br>被交警拦下来了</p>
-<p>交警：司机收了你们多少钱？<br>我： 没收钱呀<br>交警：你们这什么情况 你我都清楚 经常出事的就是你们这些车</p>
-<p>额…<br>被交警拦下来的时候<br>我TM也是一脸懵逼 感觉是不是走不了呀<br>最后交警还是放我们走了<br>到了昆明<br>大概快4点了<br>我们就随便找了个宾馆<br>睡了下来</p>
-<p>一觉睡到了12点<br>我们去吃饭</p>
-<p><img src="http://img.efraim.me/blog/photo/25-菠萝饭.png" alt="大理"><br><img src="http://img.efraim.me/blog/photo/25-肉.png" alt="大理"></p>
-<p>这顿饭味道不错 大家都吃的饱饱的</p>
-<p>吃完<br>我们去逛了下昆明的花市<br>这个季节 昆明的花正好盛开<br>买了一朵送给了又又</p>
-<p>然后我们就坐车去机场<br><img src="http://img.efraim.me/blog/photo/25-机场.png" alt="大理"></p>
-<p>然后飞机晚点1个小时<br>我们按晚1小时的点去登机<br>结果被机场的喇叭叫<br>叫的时候 我赶紧跑过去<br>没有拉着又又<br>她生气了<br>我刚开始不知道<br>最后知道了<br>确实做的不对</p>
-<hr>
-<p>毕业旅行结束了<br>我们才刚刚开始</p>
-<p>多谢你<br>让我的大学有了一个完美的句号</p>
-<p>每天的好心情都是你给的<br>我有什么理由不爱你</p>
-]]></content>
-      
-        <categories>
-            
-            <category> travel </category>
+            <category> git </category>
             
         </categories>
         
